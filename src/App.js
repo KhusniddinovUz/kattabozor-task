@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Item from "./components/layout/Item/Item";
+import loader from "./assets/roller.svg";
+import { AppContainer } from "./App.styles";
 
-function App() {
+const App = () => {
+  const [loading, setLoading] = useState(true);
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    setLoading(true);
+    axios
+      .get("https://www.kattabozor.uz/hh/test/api/v1/offers")
+      .then((response) => {
+        setItems(response.data["offers"]);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      {items &&
+        items.map((item) => (
+          <Item
+            key={item.id}
+            title={item.name}
+            category={item.category}
+            brand={item.brand}
+            merchant={item.merchant}
+            attributes={item.attributes}
+            image={item.image}
+          />
+        ))}
+      {loading && <img src={loader} alt="roller" />}
+    </AppContainer>
   );
-}
+};
 
 export default App;
