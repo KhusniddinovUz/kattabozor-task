@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const AppContainer = styled.div`
+export const HomeContainer = styled.div`
   padding: 50px;
   display: flex;
   justify-content: center;
