@@ -29,6 +29,20 @@ export const ContentWrapper = styled.div`
   flex-direction: column;
 `;
 
+export const Button = styled.button`
+  padding: 20px;
+  background-color: dodgerblue;
+  font-weight: 700;
+  font-size: 18px;
+  color: #fff;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  margin: auto;
+  display: block;
+  cursor: pointer;
+`;
+
 export const ItemData = styled.p`
   margin: 0;
   border-bottom: 1px solid #fff;

@@ -17,14 +17,11 @@ const Home = () => {
         setItems(response.data["offers"]);
         setTimeout(() => {
           setLoading(false);
-        }, 1000);
+        }, 300);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
-        setTimeout(() => {
-          setLoading(false);
-        }, 1000);
       });
   }, []);
   return (
