@@ -3,8 +3,10 @@ import axios from "axios";
 import Item from "../../components/layout/Item/Item";
 import { HomeContainer } from "./Home.styles";
 import loader from "../../assets/roller.svg";
+import { useNavigate } from "react-router";
 
 const Home = () => {
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [items, setItems] = useState([]);
   useEffect(() => {
@@ -13,18 +15,27 @@ const Home = () => {
       .get("https://www.kattabozor.uz/hh/test/api/v1/offers")
       .then((response) => {
         setItems(response.data["offers"]);
-        setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
         setLoading(false);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
       });
   }, []);
   return (
     <HomeContainer>
       {items &&
+        !loading &&
         items.map((item) => (
           <Item
+            onClick={() => {
+              navigate(`item/${item.id}`);
+            }}
             key={item.id}
             title={item.name}
             category={item.category}

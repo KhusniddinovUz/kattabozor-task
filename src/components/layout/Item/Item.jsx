@@ -8,9 +8,9 @@ import {
   CategoryText,
 } from "./item.styles";
 
-const Item = ({ title, image, merchant, brand, category }) => {
+const Item = ({ title, image, merchant, brand, category, onClick }) => {
   return (
-    <ItemContainer>
+    <ItemContainer onClick={onClick}>
       <ItemImageWrapper>
         <BrandText>{brand}</BrandText>
         <img
